@@ -54,7 +54,7 @@
 				//;
 				
 				
-				// Zoom on Scroll, Firefox scroll issue fixed.
+				// Zoom on Scroll, Firefox scroll issue fixed. Added by Renjith Prince.
 				image
 					.on( 'mousewheel DOMMouseScroll MozMousePixelScroll', function ( event ) {
 						if (event.type == 'mousewheel') {
@@ -62,7 +62,6 @@
 							crop.zoomIn() :
 							crop.zoomOut();
 						}
-						// added by Renjit, fixing firefox scroll issue
 						else if (event.type == 'DOMMouseScroll') {
 							return event.originalEvent.detail < 0 ? 
 							crop.zoomIn() :
