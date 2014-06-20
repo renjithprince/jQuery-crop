@@ -27,11 +27,18 @@ Usage
 	// using mousewheel event
 	$( 'img.crop' )
 		.crop()
-		.on( 'mousewheel', function ( event ) {
+		.on( 'mousewheel DOMMouseScroll MozMousePixelScroll', function ( event ) {
 			var crop = $(this).data('crop');
-			return event.originalEvent.wheelDelta < 0 ? 
+			if (event.type == 'mousewheel') {
+				return event.originalEvent.wheelDelta < 0 ? 
 				crop.zoomIn() :
 				crop.zoomOut();
+			}
+			else if (event.type == 'DOMMouseScroll') {
+				return event.originalEvent.detail < 0 ? 
+				crop.zoomIn() :
+				crop.zoomOut();
+			}
 		} )
 	;
 ```
