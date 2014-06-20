@@ -45,13 +45,37 @@
 						.data( 'crop' )
 				;
 				// zoom on scroll
+				//image
+					//.on( 'mousewheel.crop', function ( event ) {
+						//return event.originalEvent.wheelDelta < 0 ? 
+							//crop.zoomIn() :
+							//crop.zoomOut();
+					//} )
+				//;
+				
+				
+				// Zoom on Scroll, Firefox scroll issue fixed.
 				image
-					.on( 'mousewheel.crop', function ( event ) {
-						return event.originalEvent.wheelDelta < 0 ? 
+					.on( 'mousewheel DOMMouseScroll MozMousePixelScroll', function ( event ) {
+						if (event.type == 'mousewheel') {
+							return event.originalEvent.wheelDelta < 0 ? 
 							crop.zoomIn() :
 							crop.zoomOut();
+						}
+						// added by Renjit, fixing firefox scroll issue
+						else if (event.type == 'DOMMouseScroll') {
+							return event.originalEvent.detail < 0 ? 
+							crop.zoomIn() :
+							crop.zoomOut();
+							
+						}
 					} )
 				;
+				
+				
+				
+				
+				
 				// zoom on pinch touch
 				window.Hammer && Hammer( this )
 					.on( 'pinchin', function ( event ) {
